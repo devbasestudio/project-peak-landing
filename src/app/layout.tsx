@@ -24,7 +24,23 @@ export const metadata: Metadata = {
     images: [{ url: "/brand/social-card-project-peak-logo-v4.jpg", width: 1200, height: 630, alt: "Project Peak — Knowledge, Habits, Identity" }],
   },
   twitter: { card: "summary_large_image", images: ["/brand/social-card-project-peak-logo-v4.jpg"] },
-  icons: { icon: "/brand/icon.png", apple: "/brand/icon.png" },
+  icons: {
+    icon: [
+      { url: "/brand/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/brand/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/brand/favicon-48.png", sizes: "48x48", type: "image/png" },
+    ],
+    shortcut: [
+      { url: "/brand/favicon-32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      {
+        url: "/brand/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+  },
 };
 
 export const viewport: Viewport = { themeColor: "#06111a", colorScheme: "light" };
