@@ -123,7 +123,7 @@ export function LandingPage({ posts }: { posts: BlogPost[] }) {
       <main>
         <section id="top" className={styles.hero} data-hero>
           <div className={styles.heroImage} data-hero-image>
-            <Image src="/brand/hero-athlete-branded.jpg" fill priority sizes="100vw" alt="Project Peak athlete training" />
+            <Image src="/brand/hero-peak-logo-arena-v4.webp" fill priority sizes="100vw" alt="Project Peak athlete training toward an illuminated peak" />
           </div>
           <div className={styles.heroShade} />
           <div className={styles.heroGrid}>
@@ -197,7 +197,7 @@ export function LandingPage({ posts }: { posts: BlogPost[] }) {
 
         <section className={styles.vision} data-vision>
           <div className={styles.visionImage} data-vision-image>
-            <Image src="/brand/backpack-load-branded.jpg" fill sizes="100vw" alt="Training toward a stronger life" />
+            <Image src="/brand/vision-peak-logo-rooftop-v4.webp" fill sizes="100vw" alt="Project Peak athletes moving toward a stronger life" />
           </div>
           <div className={styles.visionShade} />
           <div className={styles.visionContent}>

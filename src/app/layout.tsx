@@ -21,9 +21,9 @@ export const metadata: Metadata = {
     siteName: "Project Peak",
     title: "Project Peak — Build the identity",
     description: "Body တစ်ခုတည်းမဟုတ်ဘဲ ရေရှည်လိုက်လုပ်နိုင်မယ့် knowledge နဲ့ habits ကို တည်ဆောက်ပါ။",
-    images: [{ url: "/brand/social-card.jpg", width: 1200, height: 630, alt: "Project Peak" }],
+    images: [{ url: "/brand/social-card-project-peak-logo-v4.jpg", width: 1200, height: 630, alt: "Project Peak — Knowledge, Habits, Identity" }],
   },
-  twitter: { card: "summary_large_image", images: ["/brand/social-card.jpg"] },
+  twitter: { card: "summary_large_image", images: ["/brand/social-card-project-peak-logo-v4.jpg"] },
   icons: { icon: "/brand/icon.png", apple: "/brand/icon.png" },
 };
 
