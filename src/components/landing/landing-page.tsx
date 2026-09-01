@@ -693,7 +693,6 @@ export function LandingPage({ posts }: { posts: BlogPost[] }) {
             <Link href="#method">Method</Link>
             <Link href="#programs">Programs</Link>
             <Link href="/journal">Journal</Link>
-            <Link href="/admin">Admin</Link>
           </nav>
           <p className={styles.copyright}>
             © {new Date().getFullYear()} PROJECT PEAK
