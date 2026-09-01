@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: "Project Peak — Build the identity", template: "%s · Project Peak" },
   description: "စိတ်ကူးထဲက body ကို တကယ်နားလည်ပြီး လိုက်လုပ်ဖြစ်အောင် စီစဉ်ထားတဲ့ fitness system။",
+  alternates: { canonical: "/" },
   applicationName: "Project Peak",
   keywords: ["Project Peak", "Myanmar fitness", "home workout", "1 on 1 coaching", "12 week workout"],
   openGraph: {
