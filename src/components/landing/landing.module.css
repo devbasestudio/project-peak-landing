@@ -762,8 +762,10 @@
 }
 .programFoot a {
   display: flex;
+  min-height: 44px;
   align-items: center;
   gap: 15px;
+  padding: 8px 0;
   font-size: 13px;
   font-weight: 750;
 }
@@ -796,10 +798,11 @@
 }
 .journalHeading > a {
   display: flex;
+  min-height: 44px;
   align-items: center;
   justify-content: flex-end;
   gap: 14px;
-  padding-bottom: 6px;
+  padding: 8px 0;
   font-size: 13px;
   font-weight: 700;
 }
@@ -917,8 +920,10 @@
 }
 .footerTop a {
   display: flex;
+  min-height: 44px;
   align-items: center;
   gap: 18px;
+  padding: 6px 0;
   font-size: clamp(19px, 2vw, 28px);
 }
 .footerWord {
@@ -953,8 +958,13 @@
 }
 .footerBottom nav {
   display: grid;
-  gap: 8px;
+  gap: 2px;
   font-size: 11px;
+}
+.footerBottom nav a {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
 }
 .copyright {
   font-family: var(--font-geist-mono);
