@@ -22,6 +22,7 @@ import styles from "./landing.module.css";
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const telegramUrl = "https://t.me/wayneax21";
+const coachingUrl = "https://project-peak-coaching.vercel.app";
 const workoutUrl = "https://project-peak-beta.vercel.app/mm/login";
 
 const methodSteps = [
@@ -544,10 +545,10 @@ export function LandingPage({ posts }: { posts: BlogPost[] }) {
                 <span>MMK / PACKAGE</span>
               </div>
               <a
-                href={telegramUrl}
+                href={coachingUrl}
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Discuss 1 on 1 coaching on Telegram"
+                aria-label="Open the Project Peak 1 on 1 coaching website"
               >
                 <ArrowUpRight />
               </a>
