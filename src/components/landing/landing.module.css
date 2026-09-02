@@ -1096,26 +1096,31 @@
     color: rgba(255, 255, 255, 0.48);
   }
   .hero {
-    min-height: 840px;
+    min-height: 940px;
   }
   .heroMedia {
+    top: 72px;
+    bottom: auto;
     width: 100%;
+    height: auto;
+    aspect-ratio: 1672 / 941;
   }
   .heroMediaInner {
     inset: 0;
   }
   .heroMedia img {
-    object-position: 68% center;
+    object-fit: contain;
+    object-position: center top;
   }
   .heroGradient {
     background:
       linear-gradient(
-        90deg,
-        rgba(6, 17, 26, 0.94) 0%,
-        rgba(6, 17, 26, 0.78) 46%,
-        rgba(6, 17, 26, 0.08) 100%
-      ),
-      linear-gradient(0deg, rgba(6, 17, 26, 0.72) 0%, transparent 46%);
+        180deg,
+        rgba(6, 17, 26, 0.02) 72px,
+        rgba(6, 17, 26, 0.12) 235px,
+        rgba(6, 17, 26, 0.94) 325px,
+        var(--ink) 390px
+      );
   }
   .heroGrid {
     background-size: 25vw 25vw;
@@ -1127,7 +1132,7 @@
   }
   .heroContent {
     width: 100%;
-    padding: 130px var(--gutter) 210px;
+    padding: 340px var(--gutter) 210px;
   }
   .eyebrow {
     font-size: 7px;
