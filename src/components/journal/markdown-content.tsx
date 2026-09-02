@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import sanitizeHtml from "sanitize-html";
 
 function inline(value: string): ReactNode[] {
   const output: ReactNode[] = [];
@@ -21,6 +22,15 @@ function inline(value: string): ReactNode[] {
 }
 
 export function MarkdownContent({ content, className }: { content: string; className?: string }) {
+  if (/^\s*<(?:p|h2|h3|ul|ol|blockquote|div|strong|em|a|br)\b/i.test(content)) {
+    const safeHtml = sanitizeHtml(content, {
+      allowedTags: ["p", "br", "h2", "h3", "strong", "em", "ul", "ol", "li", "blockquote", "a"],
+      allowedAttributes: { a: ["href", "target", "rel"] },
+      allowedSchemes: ["http", "https", "mailto"],
+      transformTags: { a: sanitizeHtml.simpleTransform("a", { target: "_blank", rel: "noreferrer" }) },
+    });
+    return <div className={className} dangerouslySetInnerHTML={{ __html: safeHtml }} />;
+  }
   const lines = content.replace(/\r\n/g, "\n").split("\n");
   const blocks: ReactNode[] = [];
   let index = 0;
