@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPublishedPost } from "@/lib/blog";
+import { MarkdownContent } from "@/components/journal/markdown-content";
 import styles from "../journal.module.css";
 
 type PageProps = { params: Promise<{ slug: string }> };
@@ -31,7 +32,7 @@ export default async function ArticlePage({ params }: PageProps) {
       <Link href="/journal" className={styles.back}>← Journal ပြန်မယ်</Link>
       <header className={styles.articleHead}><p className={styles.kicker}>{date.toUpperCase()} · {post.language === "mm" ? "မြန်မာ" : "ENGLISH"}</p><h1>{post.title}</h1><p className={styles.lead}>{post.excerpt}</p></header>
       {post.cover_image_url ? <div className={styles.cover}><Image src={post.cover_image_url} fill priority sizes="900px" alt="" /></div> : null}
-      <div className={styles.content}>{post.content.split(/\n\s*\n/).filter(Boolean).map((paragraph, index) => <p key={index}>{paragraph}</p>)}</div>
+      <MarkdownContent content={post.content} className={styles.content} />
     </article>
     <footer className={styles.footer}><Image src="/brand/logo-light.svg" width={180} height={45} alt="Project Peak" /><p>KNOWLEDGE · HABITS · IDENTITY</p></footer>
   </div>;
