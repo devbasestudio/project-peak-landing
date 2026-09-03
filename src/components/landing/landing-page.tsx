@@ -12,14 +12,8 @@ import {
   MoveRight,
   X,
 } from "lucide-react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "lenis";
 import type { BlogPost } from "@/lib/blog";
 import styles from "./landing.module.css";
-
-gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const telegramUrl = "https://t.me/wayneax21";
 const coachingUrl = "https://project-peak-coaching.vercel.app";
@@ -70,18 +64,31 @@ export function LandingPage({ posts }: { posts: BlogPost[] }) {
       "(prefers-reduced-motion: reduce)",
     ).matches;
     if (reduced) return;
-    const lenis = new Lenis({
-      duration: 1.12,
-      smoothWheel: true,
-      wheelMultiplier: 0.82,
+    let disposed = false;
+    let cleanup: (() => void) | undefined;
+    void Promise.all([import("gsap"), import("gsap/ScrollTrigger"), import("lenis")]).then(([gsapModule, scrollTriggerModule, lenisModule]) => {
+      if (disposed) return;
+      const gsap = gsapModule.default;
+      const ScrollTrigger = scrollTriggerModule.ScrollTrigger;
+      const Lenis = lenisModule.default;
+      gsap.registerPlugin(ScrollTrigger);
+      const lenis = new Lenis({
+        duration: 1.12,
+        smoothWheel: true,
+        wheelMultiplier: 0.82,
+      });
+      lenis.on("scroll", ScrollTrigger.update);
+      const ticker = (time: number) => lenis.raf(time * 1000);
+      gsap.ticker.add(ticker);
+      gsap.ticker.lagSmoothing(0);
+      cleanup = () => {
+        gsap.ticker.remove(ticker);
+        lenis.destroy();
+      };
     });
-    lenis.on("scroll", ScrollTrigger.update);
-    const ticker = (time: number) => lenis.raf(time * 1000);
-    gsap.ticker.add(ticker);
-    gsap.ticker.lagSmoothing(0);
     return () => {
-      gsap.ticker.remove(ticker);
-      lenis.destroy();
+      disposed = true;
+      cleanup?.();
     };
   }, []);
 
@@ -92,8 +99,18 @@ export function LandingPage({ posts }: { posts: BlogPost[] }) {
     };
   }, [menuOpen]);
 
-  useGSAP(
-    () => {
+  useEffect(() => {
+    const container = root.current;
+    if (!container) return;
+    let disposed = false;
+    let cleanup: (() => void) | undefined;
+
+    void Promise.all([import("gsap"), import("gsap/ScrollTrigger")]).then(([gsapModule, scrollTriggerModule]) => {
+      if (disposed) return;
+      const gsap = gsapModule.default;
+      const ScrollTrigger = scrollTriggerModule.ScrollTrigger;
+      gsap.registerPlugin(ScrollTrigger);
+      const context = gsap.context(() => {
       const reduced = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
@@ -234,9 +251,18 @@ export function LandingPage({ posts }: { posts: BlogPost[] }) {
           });
         };
       }
-    },
-    { scope: root },
-  );
+      }, container);
+      cleanup = () => context.revert();
+    }).catch(() => {
+      const intro = container.querySelector<HTMLElement>("[data-intro]");
+      if (intro) intro.style.display = "none";
+    });
+
+    return () => {
+      disposed = true;
+      cleanup?.();
+    };
+  }, []);
 
   const closeMenu = () => setMenuOpen(false);
 
