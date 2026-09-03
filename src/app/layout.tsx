@@ -3,10 +3,12 @@ import localFont from "next/font/local";
 import { Toaster } from "sonner";
 import "./globals.css";
 
-const archivo = localFont({ src: "./fonts/archivo-variable.ttf", variable: "--font-archivo", display: "swap" });
-const geist = localFont({ src: "./fonts/geist-variable.ttf", variable: "--font-geist", display: "swap", preload: false });
-const geistMono = localFont({ src: "./fonts/geist-mono-variable.ttf", variable: "--font-geist-mono", display: "swap", preload: false });
-const myanmarSagar = localFont({ src: "./fonts/myanmar-sagar.ttf", variable: "--font-myanmar", display: "swap" });
+const archivo = localFont({ src: "./fonts/english/heading/archivo-extra-bold.ttf", variable: "--font-archivo", weight: "800", display: "swap" });
+const englishSubheading = localFont({ src: "./fonts/english/subheading/archivo-semi-bold.ttf", variable: "--font-english-subheading", weight: "600", display: "swap", preload: false });
+const smallTitle = localFont({ src: "./fonts/english/small-title/albert-sans-semi-bold.ttf", variable: "--font-geist-mono", weight: "600", display: "swap", preload: false });
+const geist = localFont({ src: "./fonts/english/body/geist-variable.ttf", variable: "--font-geist", weight: "100 900", display: "swap", preload: false });
+const myanmarHeading = localFont({ src: "./fonts/myanmar/subheading/pt21-mandalay-bold.ttf", variable: "--font-myanmar-heading", weight: "700", display: "swap", preload: false });
+const myanmarBody = localFont({ src: "./fonts/myanmar/body/shwe-pa-chi-04-medium.ttf", variable: "--font-myanmar", weight: "500", display: "swap" });
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export const metadata: Metadata = {
@@ -48,7 +50,7 @@ export const viewport: Viewport = { themeColor: "#06111a", colorScheme: "light" 
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="my" className={`${archivo.variable} ${geist.variable} ${geistMono.variable} ${myanmarSagar.variable}`}>
+    <html lang="my" className={`${archivo.variable} ${englishSubheading.variable} ${smallTitle.variable} ${geist.variable} ${myanmarHeading.variable} ${myanmarBody.variable}`}>
       <body>
         {children}
         <Toaster richColors position="top-right" />
