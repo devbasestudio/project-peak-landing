@@ -9,7 +9,7 @@ const smallTitle = localFont({ src: "./fonts/english/small-title/albert-sans-sem
 const geist = localFont({ src: "./fonts/english/body/geist-variable.ttf", variable: "--font-geist", weight: "100 900", display: "swap", preload: false });
 const myanmarHeading = localFont({ src: "./fonts/myanmar/subheading/pt21-mandalay-bold.ttf", variable: "--font-myanmar-heading", weight: "700", display: "swap", preload: false });
 const myanmarBody = localFont({ src: "./fonts/myanmar/body/shwe-pa-chi-04-medium.ttf", variable: "--font-myanmar", weight: "500", display: "swap" });
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://projectpeak.fit";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

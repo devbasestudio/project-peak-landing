@@ -16,8 +16,8 @@ import type { BlogPost } from "@/lib/blog";
 import styles from "./landing.module.css";
 
 const telegramUrl = "https://t.me/wayneax21";
-const coachingUrl = "https://project-peak-coaching.vercel.app";
-const workoutUrl = "https://project-peak-beta.vercel.app/mm/login";
+const coachingUrl = "https://coaching.projectpeak.fit";
+const workoutUrl = "https://homeworkout.projectpeak.fit/mm/login";
 
 const methodSteps = [
   {
