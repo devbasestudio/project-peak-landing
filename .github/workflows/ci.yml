@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NEXT_PUBLIC_SITE_URL: https://project-peak-landing.vercel.app
-      NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+      NEXT_PUBLIC_SUPABASE_URL: http://127.0.0.1:54329
       NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: test-publishable-key
       ADMIN_APP_URL: https://project-peak-admin.vercel.app
     steps:
@@ -21,4 +21,9 @@ jobs:
       - run: npm test
       - run: npm run lint
       - run: npm run typecheck
-      - run: npm run build
+      - name: Build against isolated public-content fixture
+        run: |
+          node tests/fixtures/public-content-server.mjs &
+          FIXTURE_PID=$!
+          trap 'kill "$FIXTURE_PID"' EXIT
+          npm run build
