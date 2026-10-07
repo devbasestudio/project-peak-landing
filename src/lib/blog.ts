@@ -31,22 +31,31 @@ function createPublicClient() {
   });
 }
 
-const readPublishedPosts = unstable_cache(async () => {
+const readPublishedPosts = unstable_cache(async (limit?: number) => {
   const supabase = createPublicClient();
-  const query = supabase.from("blog_posts").select(postColumns).eq("status", "published").order("featured", { ascending: false }).order("published_at", { ascending: false });
-  const { data, error } = await query;
-  if (error) return [] as BlogPost[];
-  return (data ?? []) as BlogPost[];
+  const posts: BlogPost[] = [];
+  const listColumns = "id,author_id,slug,language,title,excerpt,cover_image_url,cover_image_path,seo_title,seo_description,status,featured,published_at,created_at,updated_at";
+  const pageSize = 500;
+  for (let from = 0; ; from += pageSize) {
+    const size = limit ? Math.min(pageSize, limit - posts.length) : pageSize;
+    const { data, error } = await supabase.from("blog_posts").select(listColumns)
+      .eq("status", "published").order("featured", { ascending: false })
+      .order("published_at", { ascending: false }).order("id").range(from, from + size - 1);
+    if (error) throw error;
+    posts.push(...(data ?? []).map((post) => ({ ...post, content: "" }) as unknown as BlogPost));
+    if (!data || data.length < size || (limit && posts.length >= limit)) return posts;
+  }
 }, ["project-peak-published-posts"], { revalidate: 60, tags: ["project-peak-posts"] });
 
 export async function getPublishedPosts(limit?: number) {
-  const posts = await readPublishedPosts();
-  return limit ? posts.slice(0, limit) : posts;
+  return readPublishedPosts(limit);
 }
 
 export async function getPublishedPost(slug: string) {
-  const posts = await readPublishedPosts();
-  return posts.find((post) => post.slug === slug) ?? null;
+  const { data, error } = await createPublicClient().from("blog_posts").select(postColumns)
+    .eq("status", "published").eq("slug", slug).maybeSingle();
+  if (error) throw error;
+  return data as BlogPost | null;
 }
 
 export async function getAdminPosts() {
